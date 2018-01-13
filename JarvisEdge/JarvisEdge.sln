@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JarvisEdge.IoC", "Infrastru
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JarvisEdge.ServiceInterfaces", "Infrastructure\JarvisEdge.ServiceInterfaces\JarvisEdge.ServiceInterfaces.csproj", "{BBC58493-BE83-47EE-884B-A4D1BD440223}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JarvisEdge.Models", "Data\JarvisEdge.Models\JarvisEdge.Models.csproj", "{C6CCBB3A-E201-43B7-AC08-26767E083C72}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JarvisEdge.Data", "Data\JarvisEdge.Data\JarvisEdge.Data.csproj", "{7206237E-E856-4E40-9560-A7DB0D6C94C5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{BBC58493-BE83-47EE-884B-A4D1BD440223}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BBC58493-BE83-47EE-884B-A4D1BD440223}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BBC58493-BE83-47EE-884B-A4D1BD440223}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6CCBB3A-E201-43B7-AC08-26767E083C72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6CCBB3A-E201-43B7-AC08-26767E083C72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6CCBB3A-E201-43B7-AC08-26767E083C72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6CCBB3A-E201-43B7-AC08-26767E083C72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7206237E-E856-4E40-9560-A7DB0D6C94C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7206237E-E856-4E40-9560-A7DB0D6C94C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7206237E-E856-4E40-9560-A7DB0D6C94C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7206237E-E856-4E40-9560-A7DB0D6C94C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +60,8 @@ Global
 		{F850B59F-87D9-4CD2-BB83-E733DDA8C0DB} = {4BC1C81C-DD1E-4567-8AC4-210D2212B271}
 		{48818AA5-594C-4032-80A8-7BE51C3D5B7C} = {4BC1C81C-DD1E-4567-8AC4-210D2212B271}
 		{BBC58493-BE83-47EE-884B-A4D1BD440223} = {4BC1C81C-DD1E-4567-8AC4-210D2212B271}
+		{C6CCBB3A-E201-43B7-AC08-26767E083C72} = {0E607D8F-3F1F-4F6E-B2FE-D753E407394D}
+		{7206237E-E856-4E40-9560-A7DB0D6C94C5} = {0E607D8F-3F1F-4F6E-B2FE-D753E407394D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D7C46456-60E6-4669-9E90-F0DBDA9271C8}

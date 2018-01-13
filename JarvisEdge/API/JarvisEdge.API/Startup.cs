@@ -1,10 +1,12 @@
 ﻿namespace JarvisEdge.API
 {
     using JarvisEdge.API.Helpers.JWT;
+    using JarvisEdge.Data;
     using JarvisEdge.IoC;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.IdentityModel.Tokens;
@@ -22,12 +24,36 @@
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            ConfigureDbContext(services);
             ConfigureAuthentication(services);
             JarvisEdgeContainer.ConfigureServices(services);
             services.AddMvc();
         }
 
-        public void ConfigureAuthentication(IServiceCollection services)
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
+            app.UseAuthentication();
+            DatabaseInitializer(app);
+            app.UseMvc();
+        }
+
+        private void ConfigureDbContext(IServiceCollection services)
+        {
+            JarvisDbConfiguration.AddDbContext(services);
+        }
+
+        private void DatabaseInitializer(IApplicationBuilder app)
+        {
+            JarvisDbConfiguration.InitializeDatabase(app);
+        }
+
+        private void ConfigureAuthentication(IServiceCollection services)
         {
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                    .AddJwtBearer(options => {
@@ -57,18 +83,6 @@
                            }
                        };
                    });
-        }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
-            app.UseAuthentication();
-            app.UseMvc();
         }
     }
 }
