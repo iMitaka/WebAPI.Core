@@ -2,17 +2,18 @@
 {
     public static class JwtConstants
     {
-        private const string jarvisTokenValidation = "Jarvis.Security.Bearer";
+        private const string jarvisIssuerValidation = "Jarvis.Security.Bearer.Issuer";
+        private const string jarvisAudienceValidation = "Jarvis.Security.Bearer.Audience";
         private const string jarvisSigningKey = "@jarvis-security";
 
         public static string GetIssuer()
         {
-            return jarvisTokenValidation;
+            return jarvisIssuerValidation;
         }
 
         public static string GetAudience()
         {
-            return jarvisTokenValidation;
+            return jarvisAudienceValidation;
         }
 
         public static string GetSigningKey()
