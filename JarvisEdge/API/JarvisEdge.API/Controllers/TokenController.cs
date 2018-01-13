@@ -15,10 +15,15 @@
         [HttpPost]
         public IActionResult CreateToken([FromBody]LoginModel model)
         {
-            var usernameFromDb = "jarvis-edge";
+            var usernameFromDb = "jarvis-test";
             var passwordFromDb = "test";
 
-            if (model.Username == usernameFromDb && model.Password == passwordFromDb)
+            var otherUsernameFromDb = "JARVIS-EDGE";
+            var otherPasswordFromDb = "test2";
+
+
+            if (model.Username.ToLower() == usernameFromDb.ToLower() && model.Password == passwordFromDb ||
+                model.Username.ToLower() == otherUsernameFromDb.ToLower() && model.Password == otherPasswordFromDb)
             {
                 var token = GenerateTokenForUser(usernameFromDb);
 
