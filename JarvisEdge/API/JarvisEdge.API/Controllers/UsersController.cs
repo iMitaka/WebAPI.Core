@@ -1,5 +1,6 @@
 ﻿namespace JarvisEdge.API.Controllers
 {
+    using JarvisEdge.ServiceInterfaces;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
@@ -7,14 +8,19 @@
     [Route("api/[controller]")]
     public class UsersController : Controller
     {
-        // GET api/values
+        private IUserService userService;
+
+        public UsersController(IUserService userService)
+        {
+            this.userService = userService;
+        }
+
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(User.Identity.IsAuthenticated);
+            return Ok(userService.GetUserData());
         }
 
-        // GET api/values/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {

@@ -1,6 +1,7 @@
 ﻿namespace JarvisEdge.API
 {
     using JarvisEdge.API.Helpers.JWT;
+    using JarvisEdge.IoC;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -22,6 +23,7 @@
         public void ConfigureServices(IServiceCollection services)
         {
             ConfigureAuthentication(services);
+            JarvisEdgeContainer.ConfigureServices(services);
             services.AddMvc();
         }
 
