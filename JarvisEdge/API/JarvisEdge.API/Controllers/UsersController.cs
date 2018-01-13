@@ -1,7 +1,9 @@
 ﻿namespace JarvisEdge.API.Controllers
 {
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
+    [Authorize]
     [Route("api/[controller]")]
     public class UsersController : Controller
     {
@@ -9,14 +11,15 @@
         [HttpGet]
         public IActionResult Get()
         {
-            return this.Ok(new string[] { "value1", "value2" });
+            return Ok(User.Identity.IsAuthenticated);
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            return this.Ok(id);
+            
+            return Ok(User.Identity.Name);
         }
     }
 }
