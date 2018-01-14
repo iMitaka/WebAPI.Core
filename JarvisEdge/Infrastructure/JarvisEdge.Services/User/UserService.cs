@@ -1,21 +1,21 @@
 ﻿namespace JarvisEdge.Services
 {
-    using JarvisEdge.Data;
+    using JarvisEdge.Data.Repositories;
     using JarvisEdge.ServiceInterfaces;
     using System.Linq;
 
     public class UserService : IUserService
     {
-        private readonly JarvisDbContext data;
+        private readonly IUowData data;
 
-        public UserService(JarvisDbContext data)
+        public UserService(IUowData data)
         {
             this.data = data;
         }
 
         public string GetUserData()
         {
-            var users = this.data.Users.ToList();
+            var users = data.ApplicationUsers.All().ToList();
             return "User Data Returned!";
         }
     }

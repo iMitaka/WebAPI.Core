@@ -1,16 +1,15 @@
 ﻿namespace JarvisEdge.Data
 {
     using JarvisEdge.Models;
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
 
-    public class JarvisDbContext : DbContext
+    public class JarvisDbContext : IdentityDbContext<ApplicationUser>
     {
         public JarvisDbContext(DbContextOptions<JarvisDbContext> options)
             : base(options)
         {
         }
-
-        public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

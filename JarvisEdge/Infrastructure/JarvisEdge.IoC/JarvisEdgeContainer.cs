@@ -1,5 +1,6 @@
 ﻿namespace JarvisEdge.IoC
 {
+    using JarvisEdge.Data.Repositories;
     using JarvisEdge.ServiceInterfaces;
     using JarvisEdge.Services;
     using Microsoft.Extensions.DependencyInjection;
@@ -8,6 +9,8 @@
     {
         public static void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IUowData, UowData>();
+
             services.AddTransient<IUserService, UserService>();
         }
     }
