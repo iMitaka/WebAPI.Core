@@ -9,6 +9,7 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.IdentityModel.Tokens;
+    using System.IdentityModel.Tokens.Jwt;
     using System.Threading.Tasks;
 
     public class Startup
@@ -61,7 +62,12 @@
 
         private void ConfigureAuthentication(IServiceCollection services)
         {
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+            services.AddAuthentication((options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }))
                    .AddJwtBearer(options => {
                        options.TokenValidationParameters =
                             new TokenValidationParameters
@@ -71,10 +77,10 @@
                                 ValidateLifetime = true,
                                 ValidateIssuerSigningKey = true,
 
-                                ValidIssuer = JwtConstants.GetIssuer(),
-                                ValidAudience = JwtConstants.GetAudience(),
+                                ValidIssuer = Helpers.Jwt.JwtConstants.GetIssuer(),
+                                ValidAudience = Helpers.Jwt.JwtConstants.GetAudience(),
                                 IssuerSigningKey =
-                                 JwtSecurityKey.Create(JwtConstants.GetSigningKey())
+                                 JwtSecurityKey.Create(Helpers.Jwt.JwtConstants.GetSigningKey())
                             };
 
                        options.Events = new JwtBearerEvents

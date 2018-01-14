@@ -15,8 +15,8 @@
 
         public string GetUserData()
         {
-            var users = data.ApplicationUsers.All().ToList();
-            return "User Data Returned!";
+            var username = data.ApplicationUsers.All().FirstOrDefault().Username;
+            return  "Data returned for: " + username;
         }
     }
 }

@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using JarvisEdge.Models;
-using Microsoft.Extensions.Logging;
-using JarvisEdge.DataTransferModels.Account;
-using JarvisEdge.Helpers.Jwt;
-using System.Security.Claims;
-
-namespace JarvisEdge.API.Controllers
+﻿namespace JarvisEdge.API.Controllers
 {
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
+    using JarvisEdge.Models;
+    using JarvisEdge.DataTransferModels.Account;
+    using JarvisEdge.Helpers.Jwt;
+    using System.Security.Claims;
+
     [Authorize]
     [Route("[controller]/[action]")]
     public class AccountController : Controller
@@ -22,15 +18,17 @@ namespace JarvisEdge.API.Controllers
 
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly RoleManager<ApplicationRole> _rolesManager;
+        private readonly RoleManager<IdentityRole> _rolesManager;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            ILogger<AccountController> logger)
+            RoleManager<IdentityRole> rolesManager
+           )
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _rolesManager = rolesManager;
         }
 
         [HttpPost]
@@ -106,7 +104,7 @@ namespace JarvisEdge.API.Controllers
             var isRoleExist = await _rolesManager.RoleExistsAsync(role);
             if (!isRoleExist)
             {
-                var roleResult = await _rolesManager.CreateAsync(new ApplicationRole { Name = role });
+                var roleResult = await _rolesManager.CreateAsync(new IdentityRole() { Name = role });
                 if (roleResult.Succeeded)
                 {
                     await _userManager.AddToRoleAsync(user, role);

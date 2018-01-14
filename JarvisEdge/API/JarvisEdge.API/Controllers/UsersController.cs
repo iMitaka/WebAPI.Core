@@ -1,11 +1,11 @@
 ﻿namespace JarvisEdge.API.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
     using JarvisEdge.ServiceInterfaces;
     using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Mvc;
 
     [Authorize]
-    [Route("api/[controller]")]
+    [Route("api/Users")]
     public class UsersController : Controller
     {
         private IUserService userService;
@@ -24,7 +24,6 @@
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            
             return Ok(User.Identity.Name);
         }
     }
