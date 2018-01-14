@@ -15,9 +15,16 @@
 
         public static void AddIdentity(IServiceCollection services)
         {
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                    .AddEntityFrameworkStores<JarvisDbContext>()
-                    .AddDefaultTokenProviders();
+            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 4;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireLowercase = false;
+            })
+            .AddEntityFrameworkStores<JarvisDbContext>()
+            .AddDefaultTokenProviders();
         }
 
         public static void InitializeDatabase(IApplicationBuilder app)
