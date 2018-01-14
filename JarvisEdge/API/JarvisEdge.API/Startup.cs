@@ -24,6 +24,7 @@
         public void ConfigureServices(IServiceCollection services)
         {
             ConfigureDbContext(services);
+            ConfigureIdentity(services);
             ConfigureAuthentication(services);
             JarvisEdgeContainer.ConfigureServices(services);
             services.AddMvc();
@@ -37,6 +38,7 @@
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseStaticFiles();
             app.UseAuthentication();
             DatabaseInitializer(app);
             app.UseMvc();
@@ -50,6 +52,11 @@
         private void DatabaseInitializer(IApplicationBuilder app)
         {
             JarvisDbConfiguration.InitializeDatabase(app);
+        }
+
+        private void ConfigureIdentity(IServiceCollection services)
+        {
+            JarvisDbConfiguration.AddIdentity(services);
         }
 
         private void ConfigureAuthentication(IServiceCollection services)
