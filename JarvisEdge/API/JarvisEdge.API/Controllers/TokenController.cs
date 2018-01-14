@@ -2,9 +2,9 @@
 {
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Authorization;
-    using JarvisEdge.API.Models.Account;
     using System.Security.Claims;
     using JarvisEdge.Helpers.Jwt;
+    using JarvisEdge.DataTransferModels.Account;
 
     [Route("token")]
     [AllowAnonymous]
@@ -13,7 +13,7 @@
         private const int tokenExpiryMinutes = 60;
 
         [HttpPost]
-        public IActionResult CreateToken([FromBody]LoginModel model)
+        public IActionResult CreateToken([FromBody]LoginPostModel model)
         {
             var usernameFromDb = "jarvis-test";
             var passwordFromDb = "test";
@@ -27,7 +27,7 @@
             {
                 var token = GenerateTokenForUser(usernameFromDb);
 
-                return Ok(token.Value);
+                return Ok(token);
             }
 
             return Unauthorized();

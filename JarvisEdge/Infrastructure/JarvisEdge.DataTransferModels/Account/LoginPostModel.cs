@@ -1,6 +1,6 @@
-﻿namespace JarvisEdge.API.Models.Account
+﻿namespace JarvisEdge.DataTransferModels.Account
 {
-    public class LoginModel
+    public class LoginPostModel
     {
         public string Username { get; set; }
         public string Password { get; set; }
