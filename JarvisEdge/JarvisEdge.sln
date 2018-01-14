@@ -5,21 +5,25 @@ VisualStudioVersion = 15.0.27004.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{B2892E27-20D0-465A-8276-F11E1013094F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JarvisEdge.API", "API\JarvisEdge.API\JarvisEdge.API.csproj", "{8B99C2D0-8448-4E1A-89DC-FF14782427B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JarvisEdge.API", "API\JarvisEdge.API\JarvisEdge.API.csproj", "{8B99C2D0-8448-4E1A-89DC-FF14782427B5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{4BC1C81C-DD1E-4567-8AC4-210D2212B271}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{0E607D8F-3F1F-4F6E-B2FE-D753E407394D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JarvisEdge.Services", "Infrastructure\JarvisEdge.Services\JarvisEdge.Services.csproj", "{F850B59F-87D9-4CD2-BB83-E733DDA8C0DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JarvisEdge.Services", "Infrastructure\JarvisEdge.Services\JarvisEdge.Services.csproj", "{F850B59F-87D9-4CD2-BB83-E733DDA8C0DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JarvisEdge.IoC", "Infrastructure\JarvisEdge.IoC\JarvisEdge.IoC.csproj", "{48818AA5-594C-4032-80A8-7BE51C3D5B7C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JarvisEdge.IoC", "Infrastructure\JarvisEdge.IoC\JarvisEdge.IoC.csproj", "{48818AA5-594C-4032-80A8-7BE51C3D5B7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JarvisEdge.ServiceInterfaces", "Infrastructure\JarvisEdge.ServiceInterfaces\JarvisEdge.ServiceInterfaces.csproj", "{BBC58493-BE83-47EE-884B-A4D1BD440223}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JarvisEdge.ServiceInterfaces", "Infrastructure\JarvisEdge.ServiceInterfaces\JarvisEdge.ServiceInterfaces.csproj", "{BBC58493-BE83-47EE-884B-A4D1BD440223}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JarvisEdge.Models", "Data\JarvisEdge.Models\JarvisEdge.Models.csproj", "{C6CCBB3A-E201-43B7-AC08-26767E083C72}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JarvisEdge.Models", "Data\JarvisEdge.Models\JarvisEdge.Models.csproj", "{C6CCBB3A-E201-43B7-AC08-26767E083C72}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JarvisEdge.Data", "Data\JarvisEdge.Data\JarvisEdge.Data.csproj", "{7206237E-E856-4E40-9560-A7DB0D6C94C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JarvisEdge.Data", "Data\JarvisEdge.Data\JarvisEdge.Data.csproj", "{7206237E-E856-4E40-9560-A7DB0D6C94C5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Helpers", "Helpers", "{E39656B6-5498-4F78-82CA-5AADC3CDC725}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JarvisEdge.Helpers", "Helpers\JarvisEdge.Helpers\JarvisEdge.Helpers.csproj", "{9D0DCB10-DAF9-497D-86A5-2228AC2D3416}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +55,10 @@ Global
 		{7206237E-E856-4E40-9560-A7DB0D6C94C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7206237E-E856-4E40-9560-A7DB0D6C94C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7206237E-E856-4E40-9560-A7DB0D6C94C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D0DCB10-DAF9-497D-86A5-2228AC2D3416}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D0DCB10-DAF9-497D-86A5-2228AC2D3416}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D0DCB10-DAF9-497D-86A5-2228AC2D3416}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D0DCB10-DAF9-497D-86A5-2228AC2D3416}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +70,7 @@ Global
 		{BBC58493-BE83-47EE-884B-A4D1BD440223} = {4BC1C81C-DD1E-4567-8AC4-210D2212B271}
 		{C6CCBB3A-E201-43B7-AC08-26767E083C72} = {0E607D8F-3F1F-4F6E-B2FE-D753E407394D}
 		{7206237E-E856-4E40-9560-A7DB0D6C94C5} = {0E607D8F-3F1F-4F6E-B2FE-D753E407394D}
+		{9D0DCB10-DAF9-497D-86A5-2228AC2D3416} = {E39656B6-5498-4F78-82CA-5AADC3CDC725}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D7C46456-60E6-4669-9E90-F0DBDA9271C8}

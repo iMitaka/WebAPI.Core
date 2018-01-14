@@ -1,12 +1,11 @@
 ﻿namespace JarvisEdge.API
 {
-    using JarvisEdge.API.Helpers.JWT;
     using JarvisEdge.Data;
+    using JarvisEdge.Helpers.Jwt;
     using JarvisEdge.IoC;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
-    using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.IdentityModel.Tokens;

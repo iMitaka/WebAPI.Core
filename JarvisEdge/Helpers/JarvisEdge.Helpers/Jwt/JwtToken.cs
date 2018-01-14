@@ -1,4 +1,4 @@
-﻿namespace JarvisEdge.API.Helpers.JWT
+﻿namespace JarvisEdge.Helpers.Jwt
 {
     using System;
     using System.IdentityModel.Tokens.Jwt;

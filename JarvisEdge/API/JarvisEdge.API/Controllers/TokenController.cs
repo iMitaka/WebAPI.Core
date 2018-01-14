@@ -2,9 +2,9 @@
 {
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Authorization;
-    using JarvisEdge.API.Helpers.JWT;
     using JarvisEdge.API.Models.Account;
     using System.Security.Claims;
+    using JarvisEdge.Helpers.Jwt;
 
     [Route("token")]
     [AllowAnonymous]

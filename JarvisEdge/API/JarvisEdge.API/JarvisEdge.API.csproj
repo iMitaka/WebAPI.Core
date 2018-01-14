@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Data\JarvisEdge.Data\JarvisEdge.Data.csproj" />
+    <ProjectReference Include="..\..\Helpers\JarvisEdge.Helpers\JarvisEdge.Helpers.csproj" />
     <ProjectReference Include="..\..\Infrastructure\JarvisEdge.IoC\JarvisEdge.IoC.csproj" />
   </ItemGroup>
 
