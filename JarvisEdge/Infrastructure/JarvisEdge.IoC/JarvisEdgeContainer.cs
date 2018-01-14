@@ -9,9 +9,17 @@
     {
         public static void ConfigureServices(IServiceCollection services)
         {
+            #region " DbContext/UowData/Repositories "
+
             services.AddScoped<IUowData, UowData>();
 
+            #endregion
+
+            #region " Services "
+
             services.AddTransient<IUserService, UserService>();
+
+            #endregion
         }
     }
 }
