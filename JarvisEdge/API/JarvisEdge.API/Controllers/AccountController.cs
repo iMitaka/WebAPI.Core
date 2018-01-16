@@ -110,8 +110,10 @@
                     await _userManager.AddToRoleAsync(user, role);
                 }
             }
-
-            await _userManager.AddToRoleAsync(user, role);
+            else
+            {
+                await _userManager.AddToRoleAsync(user, role);
+            }
 
             var claims = User.Claims.Select(c => new
             {
