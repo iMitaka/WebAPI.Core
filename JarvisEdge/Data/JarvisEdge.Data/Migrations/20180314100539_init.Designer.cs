@@ -11,8 +11,8 @@ using System;
 namespace JarvisEdge.Data.Migrations
 {
     [DbContext(typeof(JarvisDbContext))]
-    [Migration("20180114132040_ApplicationUser")]
-    partial class ApplicationUser
+    [Migration("20180314100539_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

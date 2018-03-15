@@ -11,7 +11,7 @@ using System;
 namespace JarvisEdge.Data.Migrations
 {
     [DbContext(typeof(JarvisDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    partial class JarvisDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
