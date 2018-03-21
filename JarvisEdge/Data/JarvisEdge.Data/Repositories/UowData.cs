@@ -40,5 +40,20 @@
         {
             get { return this.GetRepository<ApplicationUser>(); }
         }
+
+        public IRepository<Country> Countries
+        {
+            get { return this.GetRepository<Country>(); }
+        }
+
+        public IRepository<Town> Towns
+        {
+            get { return this.GetRepository<Town>(); }
+        }
+
+        public IRepository<Neighborhood> Neighborhoods
+        {
+            get { return this.GetRepository<Neighborhood>(); }
+        }
     }
 }

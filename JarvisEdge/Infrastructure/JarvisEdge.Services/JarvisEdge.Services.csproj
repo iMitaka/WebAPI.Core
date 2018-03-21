@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Data\JarvisEdge.Data\JarvisEdge.Data.csproj" />
+    <ProjectReference Include="..\JarvisEdge.DataTransferModels\JarvisEdge.DataTransferModels.csproj" />
     <ProjectReference Include="..\JarvisEdge.ServiceInterfaces\JarvisEdge.ServiceInterfaces.csproj" />
   </ItemGroup>
 
