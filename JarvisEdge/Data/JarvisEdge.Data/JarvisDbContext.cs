@@ -14,6 +14,10 @@
         public DbSet<Country> Countries { get; set; }
         public DbSet<Town> Towns { get; set; }
         public DbSet<Neighborhood> Neighborhoods { get; set; }
+        public DbSet<Property> Properties { get; set; }
+        public DbSet<OfferType> OfferTypes { get; set; }
+        public DbSet<PropertyType> PropertyTypes { get; set; }
+        public DbSet<PropertyStatus> PropertyStatuses { get; set; }
 
         //protected override void OnModelCreating(ModelBuilder builder)
         //{

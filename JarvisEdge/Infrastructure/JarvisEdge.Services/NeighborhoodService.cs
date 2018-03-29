@@ -37,8 +37,24 @@ namespace JarvisEdge.Services
                     TownId = model.TownId
                 });
 
+                data.SaveChanges();
+
                 return true;
             }
+            return false;
+        }
+
+        public bool DeleteNeighborhood(int id)
+        {
+            var data = this.data.Neighborhoods.All().FirstOrDefault(x => x.Id == id && !x.Deleted);
+
+            if (data != null)
+            {
+                data.Deleted = true;
+                this.data.SaveChanges();
+                return true;
+            }
+
             return false;
         }
     }

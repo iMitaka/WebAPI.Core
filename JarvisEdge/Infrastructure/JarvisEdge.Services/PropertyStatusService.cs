@@ -1,6 +1,5 @@
 ﻿using JarvisEdge.Data.Repositories;
-using JarvisEdge.DataTransferModels.Town;
-using JarvisEdge.Models;
+using JarvisEdge.DataTransferModels.PropertyStatus;
 using JarvisEdge.ServiceInterfaces;
 using System;
 using System.Collections.Generic;
@@ -9,31 +8,30 @@ using System.Text;
 
 namespace JarvisEdge.Services
 {
-    public class TownService : ITownService
+    public class PropertyStatusService : IPropertyStatusService
     {
         private readonly IUowData data;
 
-        public TownService(IUowData data)
+        public PropertyStatusService(IUowData data)
         {
             this.data = data;
         }
 
-        public IQueryable<TownGetModel> GetTownsByCountryId(int countryId)
+        public IQueryable<PropertyStatusGetModel> GetpropertyStatuses()
         {
-            return this.data.Towns.All().Where(x => !x.Deleted && x.CountryId == countryId).Select(x => new TownGetModel()
+            return data.PropertyStatuses.All().Where(x => !x.Deleted).Select(x => new PropertyStatusGetModel()
             {
                 Name = x.Name,
                 Id = x.Id
             });
         }
 
-        public bool CreateTown(TownPostModel model)
+        public bool CreatePropertyStatus(PropertyStatusPostModel model)
         {
             if (model.Name != null && model.Name.Length >= 1)
             {
-                this.data.Towns.Add(new Town()
+                data.PropertyStatuses.Add(new Models.PropertyStatus()
                 {
-                    CountryId = model.CountryId,
                     Name = model.Name
                 });
 
@@ -45,13 +43,13 @@ namespace JarvisEdge.Services
             return false;
         }
 
-        public bool DeleteTown(int id)
+        public bool DeletePropertyStatus(int id)
         {
-            var town = this.data.Towns.All().FirstOrDefault(x => x.Id == id && !x.Deleted);
+            var propertyStatus = data.PropertyStatuses.All().FirstOrDefault(x => x.Id == id && !x.Deleted);
 
-            if (town != null)
+            if (propertyStatus != null)
             {
-                town.Deleted = true;
+                propertyStatus.Deleted = true;
                 data.SaveChanges();
                 return true;
             }

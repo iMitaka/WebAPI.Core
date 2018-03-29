@@ -1,6 +1,5 @@
 ﻿using JarvisEdge.Data.Repositories;
-using JarvisEdge.DataTransferModels.Town;
-using JarvisEdge.Models;
+using JarvisEdge.DataTransferModels.PropertyType;
 using JarvisEdge.ServiceInterfaces;
 using System;
 using System.Collections.Generic;
@@ -9,53 +8,50 @@ using System.Text;
 
 namespace JarvisEdge.Services
 {
-    public class TownService : ITownService
+    public class PropertyTypeService : IPropertyTypeService
     {
         private readonly IUowData data;
 
-        public TownService(IUowData data)
+        public PropertyTypeService(IUowData data)
         {
             this.data = data;
         }
 
-        public IQueryable<TownGetModel> GetTownsByCountryId(int countryId)
+        public IQueryable<PropertyTypeGetModel> GetPropertyTypes()
         {
-            return this.data.Towns.All().Where(x => !x.Deleted && x.CountryId == countryId).Select(x => new TownGetModel()
+            return data.PropertyTypes.All().Where(x => !x.Deleted).Select(x => new PropertyTypeGetModel()
             {
-                Name = x.Name,
-                Id = x.Id
+                Id = x.Id,
+                Name = x.Name
             });
         }
 
-        public bool CreateTown(TownPostModel model)
+        public bool CreatePropertyType(PropertyTypePostModel model)
         {
             if (model.Name != null && model.Name.Length >= 1)
             {
-                this.data.Towns.Add(new Town()
+                data.PropertyTypes.Add(new Models.PropertyType()
                 {
-                    CountryId = model.CountryId,
                     Name = model.Name
                 });
 
                 data.SaveChanges();
-
                 return true;
             }
 
             return false;
         }
 
-        public bool DeleteTown(int id)
+        public bool DeletePropertyType(int id)
         {
-            var town = this.data.Towns.All().FirstOrDefault(x => x.Id == id && !x.Deleted);
+            var propertyType = data.PropertyTypes.All().FirstOrDefault(x => x.Id == id && !x.Deleted);
 
-            if (town != null)
+            if (propertyType != null)
             {
-                town.Deleted = true;
+                propertyType.Deleted = true;
                 data.SaveChanges();
                 return true;
             }
-
             return false;
         }
     }

@@ -1,6 +1,5 @@
 ﻿using JarvisEdge.Data.Repositories;
-using JarvisEdge.DataTransferModels.Town;
-using JarvisEdge.Models;
+using JarvisEdge.DataTransferModels.OfferType;
 using JarvisEdge.ServiceInterfaces;
 using System;
 using System.Collections.Generic;
@@ -9,31 +8,30 @@ using System.Text;
 
 namespace JarvisEdge.Services
 {
-    public class TownService : ITownService
+    public class OfferTypeService : IOfferTypeService
     {
         private readonly IUowData data;
 
-        public TownService(IUowData data)
+        public OfferTypeService(IUowData data)
         {
             this.data = data;
         }
 
-        public IQueryable<TownGetModel> GetTownsByCountryId(int countryId)
+        public IQueryable<OfferTypeGetModel> GetOfferTypes()
         {
-            return this.data.Towns.All().Where(x => !x.Deleted && x.CountryId == countryId).Select(x => new TownGetModel()
+            return this.data.OfferTypes.All().Where(x => !x.Deleted).Select(x => new OfferTypeGetModel()
             {
-                Name = x.Name,
-                Id = x.Id
+                Id = x.Id,
+                Name = x.Name
             });
         }
 
-        public bool CreateTown(TownPostModel model)
+        public bool CreateOfferType(OfferTypePostModel model)
         {
             if (model.Name != null && model.Name.Length >= 1)
             {
-                this.data.Towns.Add(new Town()
+                this.data.OfferTypes.Add(new Models.OfferType()
                 {
-                    CountryId = model.CountryId,
                     Name = model.Name
                 });
 
@@ -45,14 +43,15 @@ namespace JarvisEdge.Services
             return false;
         }
 
-        public bool DeleteTown(int id)
+        public bool DeleteOfferType(int id)
         {
-            var town = this.data.Towns.All().FirstOrDefault(x => x.Id == id && !x.Deleted);
+            var offerType = data.OfferTypes.All().FirstOrDefault(x => x.Id == id && !x.Deleted);
 
-            if (town != null)
+            if (offerType != null)
             {
-                town.Deleted = true;
+                offerType.Deleted = true;
                 data.SaveChanges();
+
                 return true;
             }
 

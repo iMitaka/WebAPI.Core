@@ -27,6 +27,10 @@ namespace JarvisEdge.Services
                 {
                     Name = name
                 });
+
+                data.SaveChanges();
+
+                return true;
             }
             return false;
         }
@@ -38,6 +42,20 @@ namespace JarvisEdge.Services
                 Name = x.Name,
                 Id = x.Id
             });
+        }
+
+        public bool DeleteCountry(int id)
+        {
+            var country = this.data.Countries.All().FirstOrDefault(x => x.Id == id && !x.Deleted);
+
+            if (country != null)
+            {
+                country.Deleted = true;
+                data.SaveChanges();
+
+                return true;
+            }
+            return false;
         }
     }
 }

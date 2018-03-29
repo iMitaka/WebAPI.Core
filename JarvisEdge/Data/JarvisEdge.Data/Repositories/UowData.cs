@@ -55,5 +55,22 @@
         {
             get { return this.GetRepository<Neighborhood>(); }
         }
+        public IRepository<OfferType> OfferTypes
+        {
+            get { return this.GetRepository<OfferType>(); }
+        }
+        public IRepository<Property> Properties
+        {
+            get { return this.GetRepository<Property>(); }
+        }
+        public IRepository<PropertyType> PropertyTypes
+        {
+            get { return this.GetRepository<PropertyType>(); }
+        }
+        public IRepository<PropertyStatus> PropertyStatuses
+        {
+            get { return this.GetRepository<PropertyStatus>(); }
+        }
+
     }
 }
