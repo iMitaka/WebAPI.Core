@@ -9,7 +9,9 @@
     using JarvisEdge.DataTransferModels.Account;
     using JarvisEdge.Helpers.Jwt;
     using System.Security.Claims;
+    using Microsoft.AspNetCore.Cors;
 
+    [EnableCors("CorsPolicy")]
     [Authorize]
     [Route("[controller]/[action]")]
     public class AccountController : Controller
@@ -66,7 +68,7 @@
         {
             if (User.Identity.IsAuthenticated)
             {
-                return this.Ok();
+                return this.Ok(new { isLogged = true });
             }
 
             return this.BadRequest();

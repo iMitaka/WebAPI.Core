@@ -73,7 +73,7 @@ namespace JarvisEdge.Services
                     Id = p.Id,
                     Path = p.Path,
                     OrderNumber = p.Order
-                })
+                }).OrderBy(p => p.OrderNumber)
             }
             );
 
@@ -123,7 +123,7 @@ namespace JarvisEdge.Services
                     Id = p.Id,
                     Path = p.Path,
                     OrderNumber = p.Order
-                })
+                }).OrderBy(p => p.OrderNumber)
             }
             ).FirstOrDefault();
 
@@ -172,7 +172,7 @@ namespace JarvisEdge.Services
                    Id = p.Id,
                    Path = p.Path,
                    OrderNumber = p.Order
-               })
+               }).OrderBy(p => p.OrderNumber)
            }
            ).FirstOrDefault();
 

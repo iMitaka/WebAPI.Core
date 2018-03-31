@@ -19,13 +19,13 @@ namespace JarvisEdge.Services
             this.data = data;
         }
 
-        public bool CreateCountry(string name)
+        public bool CreateCountry(CountryPostModel model)
         {
-            if (name != null && name.Length >= 1)
+            if (model.Name != null && model.Name.Length >= 1)
             {
                 this.data.Countries.Add(new Country()
                 {
-                    Name = name
+                    Name = model.Name
                 });
 
                 data.SaveChanges();

@@ -8,7 +8,7 @@ namespace JarvisEdge.ServiceInterfaces
 {
     public interface ICountryService
     {
-        bool CreateCountry(string name);
+        bool CreateCountry(CountryPostModel name);
         IQueryable<CountryGetModel> GetCountries();
         bool DeleteCountry(int id);
     }
