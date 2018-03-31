@@ -7,12 +7,12 @@ namespace JarvisEdge.Models
     public class Property
     {
         private ICollection<Photo> photos;
-        private ICollection<Extra> extras;
+        private ICollection<PropertyExtra> extras;
 
         public Property()
         {
             this.photos = new HashSet<Photo>();
-            this.extras = new HashSet<Extra>();
+            this.extras = new HashSet<PropertyExtra>();
         }
 
         public int Id { get; set; }
@@ -49,6 +49,6 @@ namespace JarvisEdge.Models
         public int? CurencyId { get; set; }
         public Curency Curency { get; set; }
         public ICollection<Photo> Photos { get => photos; set => photos = value; }
-        public ICollection<Extra> Extras { get => extras; set => extras = value; }
+        public ICollection<PropertyExtra> Extras { get => extras; set => extras = value; }
     }
 }

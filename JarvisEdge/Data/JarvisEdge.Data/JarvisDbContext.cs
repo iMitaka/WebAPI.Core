@@ -23,12 +23,25 @@
         public DbSet<BuildingType> BuildingTypes { get; set; }
         public DbSet<Extra> Extras { get; set; }
 
-        //protected override void OnModelCreating(ModelBuilder builder)
-        //{
-        //    base.OnModelCreating(builder);
-        //    // Customize the ASP.NET Identity model and override the defaults if needed.
-        //    // For example, you can rename the ASP.NET Identity table names and more.
-        //    // Add your customizations after calling base.OnModelCreating(builder);
-        //}
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            // Customize the ASP.NET Identity model and override the defaults if needed.
+            // For example, you can rename the ASP.NET Identity table names and more.
+            // Add your customizations after calling base.OnModelCreating(builder);
+
+            builder.Entity<PropertyExtra>()
+         .HasKey(pc => new { pc.PropertyId, pc.ExtraId });
+
+            builder.Entity<PropertyExtra>()
+                .HasOne(pc => pc.Property)
+                .WithMany(p => p.Extras)
+                .HasForeignKey(pc => pc.PropertyId);
+
+            builder.Entity<PropertyExtra>()
+                .HasOne(pc => pc.Extra)
+                .WithMany(c => c.Properties)
+                .HasForeignKey(pc => pc.ExtraId);
+        }
     }
 }

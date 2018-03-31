@@ -6,16 +6,16 @@ namespace JarvisEdge.Models
 {
     public class Extra
     {
-        private ICollection<Property> properties;
+        private ICollection<PropertyExtra> properties;
 
         public Extra()
         {
-            this.properties = new HashSet<Property>();
+            this.properties = new HashSet<PropertyExtra>();
         }
 
         public int Id { get; set; }
         public string Name { get; set; }
         public bool Deleted { get; set; }
-        public ICollection<Property> Properties { get => properties; set => properties = value; }
+        public ICollection<PropertyExtra> Properties { get => properties; set => properties = value; }
     }
 }

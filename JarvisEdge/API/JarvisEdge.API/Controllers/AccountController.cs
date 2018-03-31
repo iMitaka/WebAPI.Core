@@ -62,6 +62,16 @@
             return BadRequest();
         }
 
+        public IActionResult CheckIdentity()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return this.Ok();
+            }
+
+            return this.BadRequest();
+        }
+
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Register([FromBody]RegisterPostModel model)
