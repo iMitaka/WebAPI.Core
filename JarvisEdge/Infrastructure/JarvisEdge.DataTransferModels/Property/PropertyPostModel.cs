@@ -2,36 +2,19 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace JarvisEdge.Models
+namespace JarvisEdge.DataTransferModels.Property
 {
-    public class Property
+    public class PropertyPostModel
     {
-        private ICollection<Photo> photos;
-        private ICollection<Extra> extras;
-
-        public Property()
-        {
-            this.photos = new HashSet<Photo>();
-            this.extras = new HashSet<Extra>();
-        }
-
-        public int Id { get; set; }
-        public bool Deleted { get; set; }
         public bool IsVisible { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public int? TownId { get; set; }
-        public Town Town { get; set; }
         public int? CountryId { get; set; }
-        public Country Country { get; set; }
         public int? NeighborhoodId { get; set; }
-        public Neighborhood Neighborhood { get; set; }
         public int? OfferTypeId { get; set; }
-        public OfferType OfferType { get; set; }
         public int? PropertyTypeId { get; set; }
-        public PropertyType PropertyType { get; set; }
         public int? PropertyStatusId { get; set; }
-        public PropertyStatus PropertyStatus { get; set; }
         public string BedroomsCount { get; set; }
         public string BathroomsCount { get; set; }
         public string Area { get; set; }
@@ -45,10 +28,7 @@ namespace JarvisEdge.Models
         public string Floor { get; set; }
         public string AllFloorsCount { get; set; }
         public int? BuildingTypeId { get; set; }
-        public BuildingType BuildingType { get; set; }
         public int? CurencyId { get; set; }
-        public Curency Curency { get; set; }
-        public ICollection<Photo> Photos { get => photos; set => photos = value; }
-        public ICollection<Extra> Extras { get => extras; set => extras = value; }
+        public int[] ExtrasIds { get; set; }
     }
 }

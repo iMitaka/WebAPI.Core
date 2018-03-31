@@ -18,6 +18,10 @@
         public DbSet<OfferType> OfferTypes { get; set; }
         public DbSet<PropertyType> PropertyTypes { get; set; }
         public DbSet<PropertyStatus> PropertyStatuses { get; set; }
+        public DbSet<Photo> Photos { get; set; }
+        public DbSet<Curency> Curencies { get; set; }
+        public DbSet<BuildingType> BuildingTypes { get; set; }
+        public DbSet<Extra> Extras { get; set; }
 
         //protected override void OnModelCreating(ModelBuilder builder)
         //{

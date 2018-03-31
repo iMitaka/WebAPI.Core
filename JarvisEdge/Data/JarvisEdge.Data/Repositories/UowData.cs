@@ -71,6 +71,21 @@
         {
             get { return this.GetRepository<PropertyStatus>(); }
         }
-
+        public IRepository<Curency> Curencies
+        {
+            get { return this.GetRepository<Curency>(); }
+        }
+        public IRepository<BuildingType> BuildingTypes
+        {
+            get { return this.GetRepository<BuildingType>(); }
+        }
+        public IRepository<Extra> Extras
+        {
+            get { return this.GetRepository<Extra>(); }
+        }
+        public IRepository<Photo> Photos
+        {
+            get { return this.GetRepository<Photo>(); }
+        }
     }
 }

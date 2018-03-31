@@ -17,7 +17,7 @@ namespace JarvisEdge.Services
             this.data = data;
         }
 
-        public IQueryable<PropertyStatusGetModel> GetpropertyStatuses()
+        public IQueryable<PropertyStatusGetModel> GetPropertyStatuses()
         {
             return data.PropertyStatuses.All().Where(x => !x.Deleted).Select(x => new PropertyStatusGetModel()
             {

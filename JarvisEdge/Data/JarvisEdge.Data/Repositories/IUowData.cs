@@ -12,6 +12,10 @@
         IRepository<Property> Properties { get; }
         IRepository<PropertyType> PropertyTypes { get; }
         IRepository<PropertyStatus> PropertyStatuses { get; }
+        IRepository<Curency> Curencies { get; }
+        IRepository<BuildingType> BuildingTypes { get; }
+        IRepository<Extra> Extras { get; }
+        IRepository<Photo> Photos { get; }
 
         int SaveChanges();
     }
