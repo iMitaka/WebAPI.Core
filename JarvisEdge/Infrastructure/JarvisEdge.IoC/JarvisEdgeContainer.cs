@@ -28,6 +28,7 @@
             services.AddTransient<IPropertyTypeService, PropertyTypeService>();
             services.AddTransient<IPropertyStatusService, PropertyStatusService>();
             services.AddTransient<ITownService, TownService>();
+            services.AddTransient<IPropertyService, PropertyService>();
 
             #endregion
         }

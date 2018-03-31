@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JarvisEdge.DataTransferModels.Photo;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -29,6 +30,7 @@ namespace JarvisEdge.DataTransferModels.Property
         public string AllFloorsCount { get; set; }
         public int? BuildingTypeId { get; set; }
         public int? CurencyId { get; set; }
-        public int[] ExtrasIds { get; set; }
+        public IEnumerable<int> ExtrasIds { get; set; }
+        public IEnumerable<PhotoGetModel> Photos { get; set; }
     }
 }

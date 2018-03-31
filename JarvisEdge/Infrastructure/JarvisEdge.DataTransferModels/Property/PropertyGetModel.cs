@@ -31,7 +31,7 @@ namespace JarvisEdge.DataTransferModels.Property
         public string AllFloorsCount { get; set; }
         public string BuildingType { get; set; }
         public string Curency { get; set; }
-        public List<string> ExtrasIds { get; set; }
-        public List<PhotoGetModel> Photos { get; set; } 
+        public IEnumerable<string> Extras { get; set; }
+        public IEnumerable<PhotoGetModel> Photos { get; set; } 
     }
 }
