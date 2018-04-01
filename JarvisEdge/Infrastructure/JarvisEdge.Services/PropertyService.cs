@@ -35,21 +35,77 @@ namespace JarvisEdge.Services
             return null;
         }
 
-        public IQueryable<PropertyGetModel> GetProperties()
+        public IQueryable<PropertyGetModel> GetProperties(PropertyFilter filter, int page, int totalCount)
         {
             var property = data.Properties.All()
             .Include(x => x.Extras)
             .Include(x => x.Photos)
-            .Where(x => !x.Deleted)
+            .Where(x => !x.Deleted);
+
+            if (filter != null)
+            {
+                if (filter.TownId > 0)
+                {
+                    property = property.Where(x => x.TownId == filter.TownId);
+                }
+                if (filter.NeighbourhoodId > 0)
+                {
+                    property = property.Where(x => x.NeighborhoodId == filter.NeighbourhoodId);
+                }
+                if (filter.OfferTypeId > 0)
+                {
+                    property = property.Where(x => x.OfferTypeId == filter.OfferTypeId);
+                }
+                if (filter.PropertyTypeId > 0)
+                {
+                    property = property.Where(x => x.PropertyTypeId == filter.PropertyTypeId);
+                }
+                if (filter.CurrencyId > 0)
+                {
+                    property = property.Where(x => x.CurencyId == filter.CurrencyId);
+                }
+                if (filter.PriceFrom > 0)
+                {
+                    property = property.Where(x => x.Price >= filter.PriceFrom);
+                }
+                if (filter.PriceTo > 0)
+                {
+                    property = property.Where(x => x.Price <= filter.PriceTo);
+                }
+                if (filter.BedroomsFrom > 0)
+                {
+                    property = property.Where(x => x.BedroomsCount >= filter.BedroomsFrom);
+                }
+                if (filter.BedroomsTo > 0)
+                {
+                    property = property.Where(x => x.BedroomsCount <= filter.BedroomsTo);
+                }
+                if (filter.AreaFrom > 0)
+                {
+                    property = property.Where(x => x.Area >= filter.AreaFrom);
+                }
+                if (filter.AreaTo > 0)
+                {
+                    property = property.Where(x => x.Area <= filter.AreaTo.Value);
+                }
+                if (filter.CountryId > 0)
+                {
+                    property = property.Where(x => x.CountryId == filter.CountryId.Value);
+                }
+            }
+
+
+            var result = property.Take(totalCount)
+            .Skip(totalCount * (page - 1))
             .Select(x => new PropertyGetModel()
             {
                 Id = x.Id,
                 PropertyStatus = x.PropertyStatus != null ? x.PropertyStatus.Name : string.Empty,
                 Address = x.Address,
                 AllFloorsCount = x.AllFloorsCount,
-                Area = x.Area,
-                BathroomsCount = x.BathroomsCount,
-                BedroomsCount = x.BedroomsCount,
+                Area = x.Area != null ? x.Area.Value.ToString() : string.Empty,
+                BathroomsCount = x.BathroomsCount != null ? x.BathroomsCount.Value.ToString() : string.Empty,
+                BedroomsCount = x.BedroomsCount != null ? x.BedroomsCount.Value.ToString() : string.Empty,
                 BuildingType = x.BuildingType != null ? x.BuildingType.Name : string.Empty,
                 Code = x.Code,
                 Country = x.Country != null ? x.Country.Name : string.Empty,
@@ -63,23 +119,24 @@ namespace JarvisEdge.Services
                 OfferType = x.OfferType != null ? x.OfferType.Name : string.Empty,
                 OwnerName = x.OwnerName,
                 OwnerPhone = x.OwnerPhone,
-                Price = x.Price,
+                Price = x.Price != null ? x.Price.Value.ToString() : string.Empty,
                 PropertyType = x.PropertyType != null ? x.PropertyType.Name : string.Empty,
                 Title = x.Title,
                 Town = x.Town != null ? x.Town.Name : string.Empty,
                 Year = x.Year,
-                Photos = x.Photos.Select(p => new PhotoGetModel()
+                ApartamentType = x.ApartamentType != null ? x.ApartamentType.Name : string.Empty,
+                Photos = x.Photos.Where(p => !p.Deleted).Select(p => new PhotoGetModel()
                 {
                     Id = p.Id,
                     Path = p.Path,
                     OrderNumber = p.Order
                 }).OrderBy(p => p.OrderNumber)
             }
-            );
+            ).AsQueryable();
 
             if (property != null)
             {
-                return property;
+                return result;
             }
 
             return null;
@@ -97,9 +154,9 @@ namespace JarvisEdge.Services
                 PropertyStatus = x.PropertyStatus != null ? x.PropertyStatus.Name : string.Empty,
                 Address = x.Address,
                 AllFloorsCount = x.AllFloorsCount,
-                Area = x.Area,
-                BathroomsCount = x.BathroomsCount,
-                BedroomsCount = x.BedroomsCount,
+                Area = x.Area.ToString(),
+                BathroomsCount = x.BathroomsCount != null ? x.BathroomsCount.Value.ToString() : string.Empty,
+                BedroomsCount = x.BedroomsCount != null ? x.BedroomsCount.Value.ToString() : string.Empty,
                 BuildingType = x.BuildingType != null ? x.BuildingType.Name : string.Empty,
                 Code = x.Code,
                 Country = x.Country != null ? x.Country.Name : string.Empty,
@@ -113,12 +170,13 @@ namespace JarvisEdge.Services
                 OfferType = x.OfferType != null ? x.OfferType.Name : string.Empty,
                 OwnerName = x.OwnerName,
                 OwnerPhone = x.OwnerPhone,
-                Price = x.Price,
+                Price = x.Price.ToString(),
                 PropertyType = x.PropertyType != null ? x.PropertyType.Name : string.Empty,
                 Title = x.Title,
                 Town = x.Town != null ? x.Town.Name : string.Empty,
                 Year = x.Year,
-                Photos = x.Photos.Select(p => new PhotoGetModel()
+                ApartamentType = x.ApartamentType != null ? x.ApartamentType.Name : string.Empty,
+                Photos = x.Photos.Where(p => !p.Deleted).Select(p => new PhotoGetModel()
                 {
                     Id = p.Id,
                     Path = p.Path,
@@ -146,7 +204,7 @@ namespace JarvisEdge.Services
                Address = x.Address,
                PropertyStatusId = x.PropertyStatusId,
                AllFloorsCount = x.AllFloorsCount,
-               Area = x.Area,
+               Area = x.Area != null ? x.Area.Value : 0,
                BathroomsCount = x.BathroomsCount,
                BedroomsCount = x.BedroomsCount,
                BuildingTypeId = x.BuildingTypeId,
@@ -162,12 +220,13 @@ namespace JarvisEdge.Services
                OfferTypeId = x.OfferTypeId,
                OwnerName = x.OwnerName,
                OwnerPhone = x.OwnerPhone,
-               Price = x.Price,
+               Price = x.Price != null ? x.Price.Value : 0,
                PropertyTypeId = x.PropertyTypeId,
                Title = x.Title,
                TownId = x.TownId,
                Year = x.Year,
-               Photos = x.Photos.Select(p => new PhotoGetModel()
+               ApartamentTypeId = x.ApartamentTypeId,
+               Photos = x.Photos.Where(p => !p.Deleted).Select(p => new PhotoGetModel()
                {
                    Id = p.Id,
                    Path = p.Path,
@@ -216,6 +275,7 @@ namespace JarvisEdge.Services
                 property.Title = model.Title;
                 property.TownId = model.TownId;
                 property.Year = model.Year;
+                property.ApartamentTypeId = model.ApartamentTypeId;
 
                 if (model.ExtrasIds != null && model.ExtrasIds.Count() >= 1)
                 {

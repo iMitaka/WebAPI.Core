@@ -32,10 +32,10 @@ namespace JarvisEdge.Models
         public PropertyType PropertyType { get; set; }
         public int? PropertyStatusId { get; set; }
         public PropertyStatus PropertyStatus { get; set; }
-        public string BedroomsCount { get; set; }
-        public string BathroomsCount { get; set; }
-        public string Area { get; set; }
-        public string Price { get; set; }
+        public int? BedroomsCount { get; set; }
+        public int? BathroomsCount { get; set; }
+        public int? Area { get; set; }
+        public int? Price { get; set; }
         public string Year { get; set; }
         public string Address { get; set; }
         public string OwnerName { get; set; }
@@ -48,6 +48,8 @@ namespace JarvisEdge.Models
         public BuildingType BuildingType { get; set; }
         public int? CurencyId { get; set; }
         public Curency Curency { get; set; }
+        public int? ApartamentTypeId { get; set; }
+        public ApartamentType ApartamentType { get; set; }
         public ICollection<Photo> Photos { get => photos; set => photos = value; }
         public ICollection<PropertyExtra> Extras { get => extras; set => extras = value; }
     }

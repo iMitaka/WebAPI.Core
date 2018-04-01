@@ -12,5 +12,6 @@ namespace JarvisEdge.ServiceInterfaces
         Task<string> GenerateFileSource(IFormFile avatarFile, string propertyId, string specialFolderName);
         Task<bool> PostImagesForProperty(int propertyId, PhotoPostModel model);
         bool ModifyPhoto(int photoId, int orderNumber);
+        bool DeletePhoto(int photoId);
     }
 }

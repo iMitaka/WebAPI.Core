@@ -54,18 +54,15 @@ namespace JarvisEdge.Services
 
         public async Task<bool> PostImagesForProperty(int propertyId, PhotoPostModel model)
         {
-            if (model.Files != null && model.Files.Any())
+            if (model.File != null)
             {
                 string imgPath = String.Empty;
                 var photo = new Photo();
-                foreach (var image in model.Files)
-                {
-                    imgPath = await GenerateFileSource(image, propertyId.ToString(), null);
+                    imgPath = await GenerateFileSource(model.File, propertyId.ToString(), null);
                     photo.Path = imgPath;
                     photo.PropertyId = propertyId;
                     photo.IsVisiable = true;
                     data.Photos.Add(photo);
-                }
 
                 data.SaveChanges();
 
@@ -83,6 +80,20 @@ namespace JarvisEdge.Services
             if (photo != null)
             {
                 photo.Order = orderNumber;
+                data.SaveChanges();
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool DeletePhoto(int photoId)
+        {
+            var photo = data.Photos.All().FirstOrDefault(x => !x.Deleted && x.Id == photoId);
+
+            if (photo != null)
+            {
+                photo.Deleted = true;
                 data.SaveChanges();
                 return true;
             }
@@ -115,7 +126,7 @@ namespace JarvisEdge.Services
             }
             else
             {
-                uploads = Path.Combine(hostingEnvironment.WebRootPath, propertyId);
+                uploads = Path.Combine(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot"), propertyId);
             }
 
             if (!Directory.Exists(uploads))

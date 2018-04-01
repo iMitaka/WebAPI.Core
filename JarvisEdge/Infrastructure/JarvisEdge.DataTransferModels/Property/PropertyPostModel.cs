@@ -16,10 +16,10 @@ namespace JarvisEdge.DataTransferModels.Property
         public int? OfferTypeId { get; set; }
         public int? PropertyTypeId { get; set; }
         public int? PropertyStatusId { get; set; }
-        public string BedroomsCount { get; set; }
-        public string BathroomsCount { get; set; }
-        public string Area { get; set; }
-        public string Price { get; set; }
+        public int? BedroomsCount { get; set; }
+        public int? BathroomsCount { get; set; }
+        public int? Area { get; set; }
+        public int? Price { get; set; }
         public string Year { get; set; }
         public string Address { get; set; }
         public string OwnerName { get; set; }
@@ -30,6 +30,7 @@ namespace JarvisEdge.DataTransferModels.Property
         public string AllFloorsCount { get; set; }
         public int? BuildingTypeId { get; set; }
         public int? CurencyId { get; set; }
+        public int? ApartamentTypeId { get; set; }
         public IEnumerable<int> ExtrasIds { get; set; }
         public IEnumerable<PhotoGetModel> Photos { get; set; }
     }

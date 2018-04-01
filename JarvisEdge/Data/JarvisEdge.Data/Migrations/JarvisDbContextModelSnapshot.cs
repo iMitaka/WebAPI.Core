@@ -204,11 +204,13 @@ namespace JarvisEdge.Data.Migrations
 
                     b.Property<string>("AllFloorsCount");
 
-                    b.Property<string>("Area");
+                    b.Property<int?>("ApartamentTypeId");
 
-                    b.Property<string>("BathroomsCount");
+                    b.Property<int?>("Area");
 
-                    b.Property<string>("BedroomsCount");
+                    b.Property<int?>("BathroomsCount");
+
+                    b.Property<int?>("BedroomsCount");
 
                     b.Property<int?>("BuildingTypeId");
 
@@ -236,7 +238,7 @@ namespace JarvisEdge.Data.Migrations
 
                     b.Property<string>("OwnerPhone");
 
-                    b.Property<string>("Price");
+                    b.Property<int?>("Price");
 
                     b.Property<int?>("PropertyStatusId");
 
@@ -249,6 +251,8 @@ namespace JarvisEdge.Data.Migrations
                     b.Property<string>("Year");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ApartamentTypeId");
 
                     b.HasIndex("BuildingTypeId");
 
@@ -454,6 +458,10 @@ namespace JarvisEdge.Data.Migrations
 
             modelBuilder.Entity("JarvisEdge.Models.Property", b =>
                 {
+                    b.HasOne("JarvisEdge.Models.ApartamentType", "ApartamentType")
+                        .WithMany()
+                        .HasForeignKey("ApartamentTypeId");
+
                     b.HasOne("JarvisEdge.Models.BuildingType", "BuildingType")
                         .WithMany()
                         .HasForeignKey("BuildingTypeId");
