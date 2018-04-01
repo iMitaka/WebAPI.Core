@@ -1,5 +1,5 @@
 ﻿using JarvisEdge.Data.Repositories;
-using JarvisEdge.DataTransferModels.Extra;
+using JarvisEdge.DataTransferModels.ApartamentType;
 using JarvisEdge.ServiceInterfaces;
 using System;
 using System.Collections.Generic;
@@ -8,29 +8,29 @@ using System.Text;
 
 namespace JarvisEdge.Services
 {
-    public class ExtraService : IExtraService
+    public class ApartamentTypeService : IApartamentTypeService
     {
         private readonly IUowData data;
 
-        public ExtraService(IUowData data)
+        public ApartamentTypeService(IUowData data)
         {
             this.data = data;
         }
 
-        public IQueryable<ExtraGetModel> GetAllExtras()
+        public IQueryable<ApartamentTypeGetModel> GetApartamentTypes()
         {
-            return data.Extras.All().Where(x => !x.Deleted).Select(x => new ExtraGetModel()
+            return data.ApartamentTypes.All().Where(x => !x.Deleted).Select(x => new ApartamentTypeGetModel()
             {
                 Id = x.Id,
                 Name = x.Name
             }).OrderBy(x => x.Name);
         }
 
-        public bool CreateExtra(ExtraPostModel model)
+        public bool CreateApartamentType(ApartamentTypePostModel model)
         {
             if (model.Name != null && model.Name.Length >= 1)
             {
-                data.Extras.Add(new Models.Extra() { Name = model.Name });
+                data.ApartamentTypes.Add(new Models.ApartamentType() { Name = model.Name });
                 data.SaveChanges();
                 return true;
             }
@@ -38,13 +38,13 @@ namespace JarvisEdge.Services
             return false;
         }
 
-        public bool DeleteExtra(int id)
+        public bool DeleteApartamentType(int id)
         {
-            var extra = data.Extras.All().FirstOrDefault(x => !x.Deleted && x.Id == id);
+            var apartamentType = data.ApartamentTypes.All().FirstOrDefault(x => x.Id == id && !x.Deleted);
 
-            if (extra != null)
+            if (apartamentType != null)
             {
-                extra.Deleted = true;
+                apartamentType.Deleted = true;
                 data.SaveChanges();
                 return true;
             }

@@ -23,7 +23,7 @@ namespace JarvisEdge.Services
             {
                 Name = x.Name,
                 Id = x.Id
-            });
+            }).OrderBy(x => x.Name);
         }
 
         public bool CreatePropertyStatus(PropertyStatusPostModel model)

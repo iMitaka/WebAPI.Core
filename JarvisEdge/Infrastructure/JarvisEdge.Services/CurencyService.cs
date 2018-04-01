@@ -22,7 +22,7 @@ namespace JarvisEdge.Services
             return data.Curencies.All().Where(x => !x.Deleted).Select(x => new CurencyGetModel() {
                 Id = x.Id,
                 Name = x.Name
-            });
+            }).OrderBy(x => x.Name);
         }
 
         public bool CreateCurency(CurencyPostModel model)

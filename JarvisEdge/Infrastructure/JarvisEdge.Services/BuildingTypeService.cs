@@ -23,7 +23,7 @@ namespace JarvisEdge.Services
             {
                 Id = x.Id,
                 Name = x.Name
-            });
+            }).OrderBy(x => x.Name);
         }
 
         public bool CreateBuildingType(BuildingTypePostModel model)

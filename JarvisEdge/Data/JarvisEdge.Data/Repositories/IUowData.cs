@@ -16,6 +16,7 @@
         IRepository<BuildingType> BuildingTypes { get; }
         IRepository<Extra> Extras { get; }
         IRepository<Photo> Photos { get; }
+        IRepository<ApartamentType> ApartamentTypes { get; }
 
         int SaveChanges();
     }

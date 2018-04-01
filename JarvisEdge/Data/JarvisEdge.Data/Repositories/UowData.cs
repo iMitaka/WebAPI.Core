@@ -87,5 +87,9 @@
         {
             get { return this.GetRepository<Photo>(); }
         }
+        public IRepository<ApartamentType> ApartamentTypes
+        {
+            get { return this.GetRepository<ApartamentType>(); }
+        }
     }
 }

@@ -22,6 +22,7 @@
         public DbSet<Curency> Curencies { get; set; }
         public DbSet<BuildingType> BuildingTypes { get; set; }
         public DbSet<Extra> Extras { get; set; }
+        public DbSet<ApartamentType> ApartamentTypes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
