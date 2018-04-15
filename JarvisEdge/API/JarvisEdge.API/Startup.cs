@@ -24,6 +24,12 @@
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.Configure<IISOptions>(options =>
+            {
+                options.ForwardClientCertificate = false;
+            });
+
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",
@@ -32,6 +38,8 @@
                     .AllowAnyHeader()
                     .AllowCredentials());
             });
+
+
 
             ConfigureDbContext(services);
             ConfigureIdentity(services);
@@ -45,7 +53,13 @@
         {
             if (env.IsDevelopment())
             {
+                app.UseBrowserLink();
                 app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Error");
             }
 
             app.UseCors("CorsPolicy");
@@ -59,7 +73,7 @@
 
         private void ConfigureDbContext(IServiceCollection services)
         {
-            JarvisDbConfiguration.AddDbContext(services);
+            JarvisDbConfiguration.AddDbContext(services, Configuration);
         }
 
         private void DatabaseInitializer(IApplicationBuilder app)

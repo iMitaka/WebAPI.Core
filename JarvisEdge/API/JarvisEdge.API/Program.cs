@@ -12,7 +12,8 @@
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseKestrel()
+            .UseKestrel()
+            .UseIISIntegration()
                 .UseStartup<Startup>()
                 .Build();
     }

@@ -5,12 +5,13 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Configuration;
 
     public static class JarvisDbConfiguration
     {
-        public static void AddDbContext(IServiceCollection services)
+        public static void AddDbContext(IServiceCollection services, IConfiguration Configuration)
         {
-            services.AddDbContext<JarvisDbContext>(options => options.UseSqlServer(JarvisDbConstants.GetConnectionString()));
+            services.AddDbContext<JarvisDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
 
         public static void AddIdentity(IServiceCollection services)

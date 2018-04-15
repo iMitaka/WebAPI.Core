@@ -10,6 +10,20 @@ namespace JarvisEdge.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "ApartamentTypes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Deleted = table.Column<bool>(nullable: false),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ApartamentTypes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
                 {
@@ -302,9 +316,10 @@ namespace JarvisEdge.Data.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Address = table.Column<string>(nullable: true),
                     AllFloorsCount = table.Column<string>(nullable: true),
-                    Area = table.Column<string>(nullable: true),
-                    BathroomsCount = table.Column<string>(nullable: true),
-                    BedroomsCount = table.Column<string>(nullable: true),
+                    ApartamentTypeId = table.Column<int>(nullable: true),
+                    Area = table.Column<int>(nullable: true),
+                    BathroomsCount = table.Column<int>(nullable: true),
+                    BedroomsCount = table.Column<int>(nullable: true),
                     BuildingTypeId = table.Column<int>(nullable: true),
                     Code = table.Column<string>(nullable: true),
                     CountryId = table.Column<int>(nullable: true),
@@ -318,7 +333,7 @@ namespace JarvisEdge.Data.Migrations
                     OfferTypeId = table.Column<int>(nullable: true),
                     OwnerName = table.Column<string>(nullable: true),
                     OwnerPhone = table.Column<string>(nullable: true),
-                    Price = table.Column<string>(nullable: true),
+                    Price = table.Column<int>(nullable: true),
                     PropertyStatusId = table.Column<int>(nullable: true),
                     PropertyTypeId = table.Column<int>(nullable: true),
                     Title = table.Column<string>(nullable: true),
@@ -328,6 +343,12 @@ namespace JarvisEdge.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Properties", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Properties_ApartamentTypes_ApartamentTypeId",
+                        column: x => x.ApartamentTypeId,
+                        principalTable: "ApartamentTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Properties_BuildingTypes_BuildingTypeId",
                         column: x => x.BuildingTypeId,
@@ -475,6 +496,11 @@ namespace JarvisEdge.Data.Migrations
                 column: "PropertyId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Properties_ApartamentTypeId",
+                table: "Properties",
+                column: "ApartamentTypeId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Properties_BuildingTypeId",
                 table: "Properties",
                 column: "BuildingTypeId");
@@ -559,6 +585,9 @@ namespace JarvisEdge.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Properties");
+
+            migrationBuilder.DropTable(
+                name: "ApartamentTypes");
 
             migrationBuilder.DropTable(
                 name: "BuildingTypes");

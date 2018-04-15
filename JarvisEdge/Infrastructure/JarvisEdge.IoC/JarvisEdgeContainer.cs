@@ -1,5 +1,6 @@
 ﻿namespace JarvisEdge.IoC
 {
+    using JarvisEdge.Data;
     using JarvisEdge.Data.Repositories;
     using JarvisEdge.ServiceInterfaces;
     using JarvisEdge.Services;
