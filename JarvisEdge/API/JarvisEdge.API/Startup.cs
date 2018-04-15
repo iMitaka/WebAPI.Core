@@ -64,7 +64,6 @@
 
             app.UseCors("CorsPolicy");
 
-            app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseAuthentication();
             DatabaseInitializer(app);
