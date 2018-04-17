@@ -33,6 +33,7 @@ namespace JarvisEdge.DataTransferModels.Property
         public string Curency { get; set; }
         public string ApartamentType { get; set; }
         public IEnumerable<string> Extras { get; set; }
-        public IEnumerable<PhotoGetModel> Photos { get; set; } 
+        public IEnumerable<PhotoGetModel> Photos { get; set; }
+        public int TotalCount {get; set;}
     }
 }

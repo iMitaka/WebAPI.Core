@@ -42,6 +42,8 @@ namespace JarvisEdge.Services
             .Include(x => x.Photos)
             .Where(x => !x.Deleted);
 
+            var totalPropertyCount = property.Count();
+
             if (filter != null)
             {
                 if (filter.TownId > 0)
@@ -95,8 +97,7 @@ namespace JarvisEdge.Services
             }
 
 
-            var result = property.Take(totalCount)
-            .Skip(totalCount * (page - 1))
+            var result = property.Skip(totalCount * (page - 1)).Take(totalCount)
             .Select(x => new PropertyGetModel()
             {
                 Id = x.Id,
@@ -124,6 +125,7 @@ namespace JarvisEdge.Services
                 Title = x.Title,
                 Town = x.Town != null ? x.Town.Name : string.Empty,
                 Year = x.Year,
+                TotalCount = totalPropertyCount,
                 ApartamentType = x.ApartamentType != null ? x.ApartamentType.Name : string.Empty,
                 Photos = x.Photos.Where(p => !p.Deleted).Select(p => new PhotoGetModel()
                 {
