@@ -27,7 +27,7 @@ namespace JarvisEdge.API.Controllers
         [HttpPost]
         public IActionResult GetProperties([FromBody]PropertyFilter filter, int page, int totalCount, string type)
         {
-            var result = propertyService.GetProperties(filter, page, totalCount);
+            var result = propertyService.GetProperties(filter, page, totalCount, type);
 
             if (result != null)
             {
@@ -64,6 +64,19 @@ namespace JarvisEdge.API.Controllers
         public IActionResult GetPropertyForEdit(int id)
         {
             var result = propertyService.GetPropertyForEdit(id);
+
+            if (result != null)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest();
+        }
+
+        [AllowAnonymous]
+        public IActionResult GetProperty(int id)
+        {
+            var result = propertyService.GetProperty(id);
 
             if (result != null)
             {

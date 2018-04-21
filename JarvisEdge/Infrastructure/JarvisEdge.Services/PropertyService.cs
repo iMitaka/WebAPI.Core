@@ -35,7 +35,7 @@ namespace JarvisEdge.Services
             return null;
         }
 
-        public IQueryable<PropertyGetModel> GetProperties(PropertyFilter filter, int page, int totalCount)
+        public IQueryable<PropertyGetModel> GetProperties(PropertyFilter filter, int page, int totalCount, string type)
         {
             var property = data.Properties.All()
             .Include(x => x.Extras)
@@ -94,6 +94,11 @@ namespace JarvisEdge.Services
                 {
                     property = property.Where(x => x.CountryId == filter.CountryId.Value);
                 }
+            }
+
+            if (type != "admin")
+            {
+                property = property.Where(x => x.IsVisible);
             }
 
 
