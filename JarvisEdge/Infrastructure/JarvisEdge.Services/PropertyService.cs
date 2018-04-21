@@ -42,8 +42,6 @@ namespace JarvisEdge.Services
             .Include(x => x.Photos)
             .Where(x => !x.Deleted);
 
-            var totalPropertyCount = property.Count();
-
             if (filter != null)
             {
                 if (filter.TownId > 0)
@@ -101,6 +99,7 @@ namespace JarvisEdge.Services
                 property = property.Where(x => x.IsVisible);
             }
 
+            var totalPropertyCount = property.Count();
 
             var result = property.Skip(totalCount * (page - 1)).Take(totalCount)
             .Select(x => new PropertyGetModel()
