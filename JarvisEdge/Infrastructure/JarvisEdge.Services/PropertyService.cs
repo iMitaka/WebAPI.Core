@@ -40,7 +40,7 @@ namespace JarvisEdge.Services
             var property = data.Properties.All()
             .Include(x => x.Extras)
             .Include(x => x.Photos)
-            .Where(x => !x.Deleted);
+            .Where(x => !x.Deleted).OrderByDescending(x => x.IsVIP).AsQueryable();
 
             if (filter != null)
             {
@@ -286,12 +286,11 @@ namespace JarvisEdge.Services
                 if (model.ExtrasIds != null && model.ExtrasIds.Count() >= 1)
                 {
                     property.Extras.Clear();
+                    data.SaveChanges();
                     var extra = new PropertyExtra();
                     foreach (var extraId in model.ExtrasIds)
                     {
-                        extra.PropertyId = property.Id;
-                        extra.ExtraId = extraId;
-                        property.Extras.Add(extra);
+                        property.Extras.Add(new PropertyExtra() { ExtraId = extraId });
                     }
                 }
 
