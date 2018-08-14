@@ -40,56 +40,5 @@
         {
             get { return this.GetRepository<ApplicationUser>(); }
         }
-
-        public IRepository<Country> Countries
-        {
-            get { return this.GetRepository<Country>(); }
-        }
-
-        public IRepository<Town> Towns
-        {
-            get { return this.GetRepository<Town>(); }
-        }
-
-        public IRepository<Neighborhood> Neighborhoods
-        {
-            get { return this.GetRepository<Neighborhood>(); }
-        }
-        public IRepository<OfferType> OfferTypes
-        {
-            get { return this.GetRepository<OfferType>(); }
-        }
-        public IRepository<Property> Properties
-        {
-            get { return this.GetRepository<Property>(); }
-        }
-        public IRepository<PropertyType> PropertyTypes
-        {
-            get { return this.GetRepository<PropertyType>(); }
-        }
-        public IRepository<PropertyStatus> PropertyStatuses
-        {
-            get { return this.GetRepository<PropertyStatus>(); }
-        }
-        public IRepository<Curency> Curencies
-        {
-            get { return this.GetRepository<Curency>(); }
-        }
-        public IRepository<BuildingType> BuildingTypes
-        {
-            get { return this.GetRepository<BuildingType>(); }
-        }
-        public IRepository<Extra> Extras
-        {
-            get { return this.GetRepository<Extra>(); }
-        }
-        public IRepository<Photo> Photos
-        {
-            get { return this.GetRepository<Photo>(); }
-        }
-        public IRepository<ApartamentType> ApartamentTypes
-        {
-            get { return this.GetRepository<ApartamentType>(); }
-        }
     }
 }

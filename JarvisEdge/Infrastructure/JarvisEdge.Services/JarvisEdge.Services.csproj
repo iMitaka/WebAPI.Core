@@ -5,8 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="7.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.0.1" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="5.1.5" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Data\JarvisEdge.Data\JarvisEdge.Data.csproj" />
+    <ProjectReference Include="..\..\Helpers\JarvisEdge.Helpers\JarvisEdge.Helpers.csproj" />
     <ProjectReference Include="..\JarvisEdge.DataTransferModels\JarvisEdge.DataTransferModels.csproj" />
+    <ProjectReference Include="..\JarvisEdge.Constants\JarvisEdge.Constants.csproj" />
     <ProjectReference Include="..\JarvisEdge.ServiceInterfaces\JarvisEdge.ServiceInterfaces.csproj" />
   </ItemGroup>
 

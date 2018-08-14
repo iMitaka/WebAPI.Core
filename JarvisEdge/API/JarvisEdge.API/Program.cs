@@ -2,6 +2,7 @@
 {
     using Microsoft.AspNetCore;
     using Microsoft.AspNetCore.Hosting;
+    using System.IO;
 
     public class Program
     {
@@ -12,8 +13,8 @@
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-            .UseKestrel()
-            .UseIISIntegration()
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseKestrel()
                 .UseStartup<Startup>()
                 .Build();
     }

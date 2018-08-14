@@ -221,6 +221,11 @@ UpgradeLog*.htm
 *.ldf
 *.ndf
 
+# Image files
+*.jpg
+*.png
+*.gif
+
 # Business Intelligence projects
 *.rdl.data
 *.bim.layout
@@ -286,3 +291,5 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
+/JarvisEdge/API/JarvisEdge.API/Logs
+/JarvisEdge/Data/JarvisEdge.Data/Migrations

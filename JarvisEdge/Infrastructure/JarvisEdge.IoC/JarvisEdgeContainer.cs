@@ -1,6 +1,5 @@
 ﻿namespace JarvisEdge.IoC
 {
-    using JarvisEdge.Data;
     using JarvisEdge.Data.Repositories;
     using JarvisEdge.ServiceInterfaces;
     using JarvisEdge.Services;
@@ -20,18 +19,6 @@
 
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IFileService, FileService>();
-            services.AddTransient<IBuildingTypeService, BuildingTypeService>();
-            services.AddTransient<ICountryService, CountryService>();
-            services.AddTransient<ICurencyService, CurencyService>();
-            services.AddTransient<IExtraService, ExtraService>();
-            services.AddTransient<INeighborhoodService, NeighborhoodService>();
-            services.AddTransient<IOfferTypeService, OfferTypeService>();
-            services.AddTransient<IPropertyTypeService, PropertyTypeService>();
-            services.AddTransient<IPropertyStatusService, PropertyStatusService>();
-            services.AddTransient<ITownService, TownService>();
-            services.AddTransient<IPropertyService, PropertyService>();
-            services.AddTransient<IApartamentTypeService, ApartamentTypeService>();
-
             #endregion
         }
     }

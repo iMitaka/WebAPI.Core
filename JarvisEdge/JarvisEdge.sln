@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2010
+VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{B2892E27-20D0-465A-8276-F11E1013094F}"
 EndProject
@@ -23,9 +23,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JarvisEdge.Data", "Data\Jar
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Helpers", "Helpers", "{E39656B6-5498-4F78-82CA-5AADC3CDC725}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JarvisEdge.Helpers", "Helpers\JarvisEdge.Helpers\JarvisEdge.Helpers.csproj", "{9D0DCB10-DAF9-497D-86A5-2228AC2D3416}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JarvisEdge.Helpers", "Helpers\JarvisEdge.Helpers\JarvisEdge.Helpers.csproj", "{9D0DCB10-DAF9-497D-86A5-2228AC2D3416}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JarvisEdge.DataTransferModels", "Infrastructure\JarvisEdge.DataTransferModels\JarvisEdge.DataTransferModels.csproj", "{24A22A44-3624-4B66-99AB-0D1B792A92F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JarvisEdge.DataTransferModels", "Infrastructure\JarvisEdge.DataTransferModels\JarvisEdge.DataTransferModels.csproj", "{24A22A44-3624-4B66-99AB-0D1B792A92F6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JarvisEdge.Constants", "Infrastructure\JarvisEdge.Constants\JarvisEdge.Constants.csproj", "{05E4E12C-EC91-4792-8E92-01EB04736D28}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,6 +67,10 @@ Global
 		{24A22A44-3624-4B66-99AB-0D1B792A92F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24A22A44-3624-4B66-99AB-0D1B792A92F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{24A22A44-3624-4B66-99AB-0D1B792A92F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05E4E12C-EC91-4792-8E92-01EB04736D28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05E4E12C-EC91-4792-8E92-01EB04736D28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05E4E12C-EC91-4792-8E92-01EB04736D28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05E4E12C-EC91-4792-8E92-01EB04736D28}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -78,6 +84,7 @@ Global
 		{7206237E-E856-4E40-9560-A7DB0D6C94C5} = {0E607D8F-3F1F-4F6E-B2FE-D753E407394D}
 		{9D0DCB10-DAF9-497D-86A5-2228AC2D3416} = {E39656B6-5498-4F78-82CA-5AADC3CDC725}
 		{24A22A44-3624-4B66-99AB-0D1B792A92F6} = {4BC1C81C-DD1E-4567-8AC4-210D2212B271}
+		{05E4E12C-EC91-4792-8E92-01EB04736D28} = {4BC1C81C-DD1E-4567-8AC4-210D2212B271}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D7C46456-60E6-4669-9E90-F0DBDA9271C8}
