@@ -12,7 +12,7 @@ namespace JarvisEdge.ServiceInterfaces
         IQueryable<PropertyGetModel> GetProperties(PropertyFilter filter, int page, int totalCount, string type);
         PropertyGetModel GetProperty(int id);
         PropertyPostModel GetPropertyForEdit(int id);
-        bool EditProperty(PropertyPostModel model, int id);
-        bool DeleteProperty(int id);
+        bool EditProperty(PropertyPostModel model, int id, string usermane);
+        bool DeleteProperty(int id, string username);
     }
 }

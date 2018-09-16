@@ -51,7 +51,7 @@ namespace JarvisEdge.API.Controllers
 
         public IActionResult DeleteProperty(int id)
         {
-            var result = propertyService.DeleteProperty(id);
+            var result = propertyService.DeleteProperty(id, User.Identity.Name);
 
             if (result)
             {
@@ -89,7 +89,7 @@ namespace JarvisEdge.API.Controllers
         [HttpPost]
         public IActionResult EditProperty([FromBody]PropertyPostModel model, int id)
         {
-            var result = propertyService.EditProperty(model, id);
+            var result = propertyService.EditProperty(model, id, User.Identity.Name);
 
             if (result)
             {

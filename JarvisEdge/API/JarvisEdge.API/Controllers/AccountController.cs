@@ -37,6 +37,10 @@
         [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody]LoginPostModel model)
         {
+            string[] bannedUsers = { "test" };
+
+            if (bannedUsers.Any(x => x.ToLower().Contains(model.Username.ToLower()))) return BadRequest();
+
             if (ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout
@@ -80,7 +84,7 @@
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Username, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Username, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, MiddleName =  model.MiddleName, Phone = model.Phone };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

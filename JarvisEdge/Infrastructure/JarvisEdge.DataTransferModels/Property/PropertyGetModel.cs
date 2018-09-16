@@ -35,5 +35,7 @@ namespace JarvisEdge.DataTransferModels.Property
         public IEnumerable<string> Extras { get; set; }
         public IEnumerable<PhotoGetModel> Photos { get; set; }
         public int TotalCount {get; set;}
+        public string createdBy { get; set; }
+        public string createrPhone { get; set; } 
     }
 }

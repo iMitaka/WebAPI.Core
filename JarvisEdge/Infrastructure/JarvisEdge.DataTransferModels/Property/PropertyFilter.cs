@@ -18,5 +18,6 @@ namespace JarvisEdge.DataTransferModels.Property
         public int? TownId { get; set; }
         public int? NeighbourhoodId { get; set; }
         public int? CountryId { get; set; }
+        public string address { get; set; }
     }
 }

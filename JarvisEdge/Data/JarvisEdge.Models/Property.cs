@@ -50,6 +50,8 @@ namespace JarvisEdge.Models
         public Curency Curency { get; set; }
         public int? ApartamentTypeId { get; set; }
         public ApartamentType ApartamentType { get; set; }
+        public string ApplicationUserId { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
         public ICollection<Photo> Photos { get => photos; set => photos = value; }
         public ICollection<PropertyExtra> Extras { get => extras; set => extras = value; }
     }

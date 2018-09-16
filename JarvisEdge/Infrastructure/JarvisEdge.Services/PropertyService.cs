@@ -92,6 +92,10 @@ namespace JarvisEdge.Services
                 {
                     property = property.Where(x => x.CountryId == filter.CountryId.Value);
                 }
+                if (filter.address != null && filter.address.Length >= 1)
+                {
+                    property = property.Where(x => x.Address.ToLower().Contains(filter.address.ToLower()) || x.OwnerPhone.ToLower().Contains(filter.address.ToLower()));
+                }
             }
 
             if (type != "admin")
@@ -131,6 +135,8 @@ namespace JarvisEdge.Services
                 Year = x.Year,
                 TotalCount = totalPropertyCount,
                 ApartamentType = x.ApartamentType != null ? x.ApartamentType.Name : string.Empty,
+                createdBy = x.ApplicationUserId != null ? x.ApplicationUser.FirstName + ' ' + x.ApplicationUser.LastName : string.Empty,
+                createrPhone = x.ApplicationUserId != null ? x.ApplicationUser.Phone : string.Empty,
                 Photos = x.Photos.Where(p => !p.Deleted).Select(p => new PhotoGetModel()
                 {
                     Id = p.Id,
@@ -182,6 +188,8 @@ namespace JarvisEdge.Services
                 Town = x.Town != null ? x.Town.Name : string.Empty,
                 Year = x.Year,
                 ApartamentType = x.ApartamentType != null ? x.ApartamentType.Name : string.Empty,
+                createdBy = x.ApplicationUserId != null ? x.ApplicationUser.FirstName + ' ' + x.ApplicationUser.LastName : string.Empty,
+                createrPhone = x.ApplicationUserId != null ?  x.ApplicationUser.Phone : string.Empty,
                 Photos = x.Photos.Where(p => !p.Deleted).Select(p => new PhotoGetModel()
                 {
                     Id = p.Id,
@@ -250,67 +258,73 @@ namespace JarvisEdge.Services
             return null;
         }
 
-        public bool EditProperty(PropertyPostModel model, int id)
+        public bool EditProperty(PropertyPostModel model, int id, string username)
         {
             var property = data.Properties.All()
-                .Include(x => x.Extras)
-                .Include(x => x.Photos)
-                .FirstOrDefault(x => !x.Deleted && x.Id == id);
+             .Include(x => x.Extras)
+             .Include(x => x.Photos)
+             .FirstOrDefault(x => !x.Deleted && x.Id == id);
 
             if (property != null)
             {
-                property.Address = model.Address;
-                property.AllFloorsCount = model.AllFloorsCount;
-                property.Area = model.Area;
-                property.BathroomsCount = model.BathroomsCount;
-                property.BedroomsCount = model.BedroomsCount;
-                property.BuildingTypeId = model.BuildingTypeId;
-                property.CountryId = model.CountryId;
-                property.CurencyId = model.CurencyId;
-                property.Description = model.Description;
-                property.Floor = model.Floor;
-                property.IsVIP = model.IsVIP;
-                property.IsVisible = model.IsVisible;
-                property.NeighborhoodId = model.NeighborhoodId;
-                property.OfferTypeId = model.OfferTypeId;
-                property.OwnerName = model.OwnerName;
-                property.OwnerPhone = model.OwnerPhone;
-                property.Price = model.Price;
-                property.PropertyStatusId = model.PropertyStatusId;
-                property.PropertyTypeId = model.PropertyTypeId;
-                property.Title = model.Title;
-                property.TownId = model.TownId;
-                property.Year = model.Year;
-                property.ApartamentTypeId = model.ApartamentTypeId;
+                if ((property.ApplicationUserId == null && property.ApplicationUser.UserName == "admin") || property.ApplicationUser.UserName == username) {
+               
+                    property.Address = model.Address;
+                    property.AllFloorsCount = model.AllFloorsCount;
+                    property.Area = model.Area;
+                    property.BathroomsCount = model.BathroomsCount;
+                    property.BedroomsCount = model.BedroomsCount;
+                    property.BuildingTypeId = model.BuildingTypeId;
+                    property.CountryId = model.CountryId;
+                    property.CurencyId = model.CurencyId;
+                    property.Description = model.Description;
+                    property.Floor = model.Floor;
+                    property.IsVIP = model.IsVIP;
+                    property.IsVisible = model.IsVisible;
+                    property.NeighborhoodId = model.NeighborhoodId;
+                    property.OfferTypeId = model.OfferTypeId;
+                    property.OwnerName = model.OwnerName;
+                    property.OwnerPhone = model.OwnerPhone;
+                    property.Price = model.Price;
+                    property.PropertyStatusId = model.PropertyStatusId;
+                    property.PropertyTypeId = model.PropertyTypeId;
+                    property.Title = model.Title;
+                    property.TownId = model.TownId;
+                    property.Year = model.Year;
+                    property.ApartamentTypeId = model.ApartamentTypeId;
 
-                if (model.ExtrasIds != null && model.ExtrasIds.Count() >= 1)
-                {
-                    property.Extras.Clear();
-                    data.SaveChanges();
-                    var extra = new PropertyExtra();
-                    foreach (var extraId in model.ExtrasIds)
+                    if (model.ExtrasIds != null && model.ExtrasIds.Count() >= 1)
                     {
-                        property.Extras.Add(new PropertyExtra() { ExtraId = extraId });
+                        property.Extras.Clear();
+                        data.SaveChanges();
+                        var extra = new PropertyExtra();
+                        foreach (var extraId in model.ExtrasIds)
+                        {
+                            property.Extras.Add(new PropertyExtra() { ExtraId = extraId });
+                        }
                     }
-                }
 
-                data.SaveChanges();
-                return true;
+                    data.SaveChanges();
+                    return true;
+                }
             }
 
             return false;
         }
 
-        public bool DeleteProperty(int id)
+        public bool DeleteProperty(int id, string username)
         {
             var property = data.Properties.All()
                 .FirstOrDefault(x => !x.Deleted && x.Id == id);
 
             if (property != null)
             {
-                property.Deleted = true;
-                data.SaveChanges();
-                return true;
+                if ((property.ApplicationUserId == null && property.ApplicationUser.UserName == "admin") || property.ApplicationUser.UserName == username)
+                {
+                    property.Deleted = true;
+                    data.SaveChanges();
+                    return true;
+                }
             }
 
             return false;
