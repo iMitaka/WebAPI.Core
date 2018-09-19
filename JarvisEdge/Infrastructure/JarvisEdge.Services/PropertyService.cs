@@ -266,6 +266,7 @@ namespace JarvisEdge.Services
             var property = data.Properties.All()
              .Include(x => x.Extras)
              .Include(x => x.Photos)
+             .Include(x => x.ApplicationUser)
              .FirstOrDefault(x => !x.Deleted && x.Id == id);
 
             if (property != null)
@@ -318,6 +319,7 @@ namespace JarvisEdge.Services
         public bool DeleteProperty(int id, string username)
         {
             var property = data.Properties.All()
+                .Include(x => x.ApplicationUser)
                 .FirstOrDefault(x => !x.Deleted && x.Id == id);
 
             if (property != null)
