@@ -82,6 +82,8 @@
         [AllowAnonymous]
         public async Task<IActionResult> Register([FromBody]RegisterPostModel model)
         {
+            if (this.User.Identity.Name.ToLower() != "admin") return BadRequest();
+
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Username, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, MiddleName =  model.MiddleName, Phone = model.Phone };
