@@ -39,7 +39,7 @@ namespace JarvisEdge.API.Controllers
 
         public IActionResult CreateProperty(string title)
         {
-            var result = propertyService.CreateProperty(title);
+            var result = propertyService.CreateProperty(title, this.User.Identity.Name);
 
             if (result != null)
             {

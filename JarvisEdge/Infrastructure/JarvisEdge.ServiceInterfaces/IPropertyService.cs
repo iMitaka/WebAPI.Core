@@ -8,7 +8,7 @@ namespace JarvisEdge.ServiceInterfaces
 {
     public interface IPropertyService
     {
-        int? CreateProperty(string name);
+        int? CreateProperty(string name, string username);
         IQueryable<PropertyGetModel> GetProperties(PropertyFilter filter, int page, int totalCount, string type);
         PropertyGetModel GetProperty(int id);
         PropertyPostModel GetPropertyForEdit(int id);

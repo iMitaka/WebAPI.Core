@@ -20,13 +20,16 @@ namespace JarvisEdge.Services
             this.data = data;
         }
 
-        public int? CreateProperty(string name)
+        public int? CreateProperty(string name, string username)
         {
+            var user = data.ApplicationUsers.All().FirstOrDefault(x => x.UserName.ToLower() == username.ToLower());
+
             if (name != null && name.Length >= 1)
             {
                 var property = new Models.Property() { Title = name };
                 var code = 10000 + data.Properties.All().Count() + 1;
                 property.Code = code.ToString();
+                property.ApplicationUser = user;
                 this.data.Properties.Add(property);
                 data.SaveChanges();
                 return property.Id;
@@ -267,7 +270,7 @@ namespace JarvisEdge.Services
 
             if (property != null)
             {
-                if ((property.ApplicationUserId == null && property.ApplicationUser.UserName == "admin") || property.ApplicationUser.UserName == username) {
+                if ((property.ApplicationUserId == null && username.ToLower() == "admin") || property.ApplicationUser.UserName.ToLower() == username.ToLower()) {
                
                     property.Address = model.Address;
                     property.AllFloorsCount = model.AllFloorsCount;
@@ -319,7 +322,7 @@ namespace JarvisEdge.Services
 
             if (property != null)
             {
-                if ((property.ApplicationUserId == null && property.ApplicationUser.UserName == "admin") || property.ApplicationUser.UserName == username)
+                if ((property.ApplicationUserId == null && username.ToLower() == "admin") || property.ApplicationUser.UserName.ToLower() == username.ToLower())
                 {
                     property.Deleted = true;
                     data.SaveChanges();
