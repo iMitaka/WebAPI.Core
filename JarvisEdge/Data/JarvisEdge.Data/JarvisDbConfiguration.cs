@@ -11,7 +11,7 @@
     {
         public static void AddDbContext(IServiceCollection services, IConfiguration Configuration)
         {
-            services.AddDbContext<JarvisDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<JarvisDbContext>(options => options.UseSqlite("Data Source=homes.db"));
         }
 
         public static void AddIdentity(IServiceCollection services)

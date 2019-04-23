@@ -9,7 +9,7 @@
         public JarvisDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<JarvisDbContext>();
-            optionsBuilder.UseSqlServer("Data Source =.\\SQLEXPRESS;Initial Catalog = HomesTest; Integrated Security = True; MultipleActiveResultSets=True");
+            optionsBuilder.UseSqlite("Data Source=homes.db");
 
             return new JarvisDbContext(optionsBuilder.Options);
         }

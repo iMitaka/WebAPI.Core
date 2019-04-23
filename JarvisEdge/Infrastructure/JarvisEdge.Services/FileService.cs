@@ -5,11 +5,13 @@ using JarvisEdge.ServiceInterfaces;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using System;
-using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+using System.Drawing.Text;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace JarvisEdge.Services
@@ -56,13 +58,18 @@ namespace JarvisEdge.Services
         {
             if (model.File != null)
             {
-                string imgPath = String.Empty;
                 var photo = new Photo();
-                    imgPath = await GenerateFileSource(model.File, propertyId.ToString(), null);
-                    photo.Path = imgPath;
-                    photo.PropertyId = propertyId;
-                    photo.IsVisiable = true;
-                    data.Photos.Add(photo);
+                string imgFolder = Path.Combine(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot"), propertyId.ToString());
+                var uploadedImgPath = await GenerateFileSource(model.File, propertyId.ToString(), null);
+                string waterMarkedImagePath = Path.Combine(imgFolder, Guid.NewGuid().ToString() + "." + uploadedImgPath.Split('.')[1]);
+                WaterMarkImage(Path.Combine(imgFolder, uploadedImgPath), waterMarkedImagePath, "FARA IMOTI");
+                string imgPath = Guid.NewGuid().ToString() + ".jpeg";
+                string optimizedImgPath = Path.Combine(imgFolder, imgPath);
+                CompressImage(waterMarkedImagePath, optimizedImgPath);
+                photo.Path = imgPath;
+                photo.PropertyId = propertyId;
+                photo.IsVisiable = true;
+                data.Photos.Add(photo);
 
                 data.SaveChanges();
 
@@ -95,6 +102,8 @@ namespace JarvisEdge.Services
             {
                 photo.Deleted = true;
                 data.SaveChanges();
+                var path = Path.Combine(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot"), photo.PropertyId.ToString());
+                File.Delete(Path.Combine(path, photo.Path));
                 return true;
             }
 
@@ -145,6 +154,67 @@ namespace JarvisEdge.Services
             }
 
             return $"{hash}{avatarFileExtension}";
+        }
+
+        private void WaterMarkImage(string imgPath, string savePath, string waterMarkText)
+        {
+            using (var img = Image.FromFile(imgPath))
+            {
+                using (var graphic = Graphics.FromImage(img))
+                {
+                    PrivateFontCollection myFonts = new PrivateFontCollection();
+                    myFonts.AddFontFile(Path.Combine(Directory.GetCurrentDirectory(), "Delija.ttf"));
+                    var font = new Font(myFonts.Families[0], img.Width / 4, FontStyle.Regular, GraphicsUnit.Pixel);
+                    var color = Color.FromArgb(55, Color.DeepPink);
+                    var brush = new SolidBrush(color);
+                    var point = new Point(img.Width / 2 - (img.Width / 2 - (img.Width / 30)), img.Height / 2 - (img.Height / 10));
+
+                    graphic.DrawString(waterMarkText, font, brush, point);
+                    img.Save(savePath);
+                }
+            }
+
+            File.Delete(imgPath);
+        }
+
+        private void CompressImage(string imgPath, string savePath)
+        {
+            int size = 1300;
+            int quality = 100;
+
+            using (var image = Image.FromFile(imgPath))
+            {
+                int width, height;
+                if (image.Width > image.Height)
+                {
+                    width = size;
+                    height = Convert.ToInt32(image.Height * size / (double)image.Width);
+                }
+                else
+                {
+                    width = Convert.ToInt32(image.Width * size / (double)image.Height);
+                    height = size;
+                }
+                var resized = new Bitmap(width, height);
+                using (var graphics = Graphics.FromImage(resized))
+                {
+                    graphics.CompositingQuality = CompositingQuality.HighSpeed;
+                    graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                    graphics.CompositingMode = CompositingMode.SourceCopy;
+                    graphics.DrawImage(image, 0, 0, width, height);
+                    using (var output = File.Open(savePath, FileMode.Create))
+                    {
+                        var qualityParamId = System.Drawing.Imaging.Encoder.Quality;
+                        var encoderParameters = new EncoderParameters(1);
+                        encoderParameters.Param[0] = new EncoderParameter(qualityParamId, quality);
+                        var codec = ImageCodecInfo.GetImageDecoders()
+                            .FirstOrDefault(x => x.FormatID == ImageFormat.Jpeg.Guid);
+                        resized.Save(output, codec, encoderParameters);
+                    }
+                }
+            }
+
+            File.Delete(imgPath);
         }
         #endregion
 

@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
+    <PackageReference Include="System.Drawing.Common" Version="4.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Data\JarvisEdge.Data\JarvisEdge.Data.csproj" />
     <ProjectReference Include="..\JarvisEdge.DataTransferModels\JarvisEdge.DataTransferModels.csproj" />
     <ProjectReference Include="..\JarvisEdge.ServiceInterfaces\JarvisEdge.ServiceInterfaces.csproj" />
