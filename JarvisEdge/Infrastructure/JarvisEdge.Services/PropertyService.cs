@@ -43,7 +43,7 @@ namespace JarvisEdge.Services
             var property = data.Properties.All()
             .Include(x => x.Extras)
             .Include(x => x.Photos)
-            .Where(x => !x.Deleted).OrderByDescending(x => x.IsVIP).AsQueryable();
+            .Where(x => !x.Deleted).OrderByDescending(x => x.IsVIP).ThenByDescending(x => x.Id).AsQueryable();
 
             if (filter != null)
             {
